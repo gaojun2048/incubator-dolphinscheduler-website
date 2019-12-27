@@ -144,15 +144,41 @@ Change the variable to 'true' if you want to use hdfs, you also need to create t
 <h3>Compile source code to deploy</h3>
 <p>After downloading the release version of the source package, unzip it into the root directory</p>
 <ul>
-<li>Execute the compilation command：</li>
-</ul>
+<li>
+<p>Build a tar package</p>
+<p>Execute the compilation command：</p>
 <pre><code> mvn -U clean package -Prelease -Dmaven.test.skip=true
 </code></pre>
-<ul>
-<li>View directory</li>
-</ul>
+<p>View directory</p>
 <p>After normal compilation, <code>apache-dolphinscheduler-incubating-${latest.release.version}-dolphinscheduler-backend-bin.tar.gz</code>
 is generated in the <code>./dolphinscheduler-dist/dolphinscheduler-backend/target</code> directory</p>
+</li>
+<li>
+<p>OR build a rpm package</p>
+<p>The rpm package can be installed on the Linux platform using the rpm command or yum. The rpm package can be used to help Dolphinscheduler better integrate with other management tools, such as ambari, cloudera manager.</p>
+<p>Execute the compilation command：</p>
+<pre><code> mvn -U clean package -Prpmbuild -Dmaven.test.skip=true
+</code></pre>
+<p>View directory</p>
+<p>After normal compilation, <code>apache-dolphinscheduler-incubating-${latest.release.version}-1.noarch.rpm</code>
+is generated in the <code>./dolphinscheduler-dist/target/rpm/apache-dolphinscheduler-incubating/RPMS/noarch/</code> directory</p>
+</li>
+<li>
+<p>Decompress the compiled tar.gz package or use the rpm command to install (the rpm installation method will install dolphinscheduler in the /opt/soft directory) . The dolphinscheduler directory structure is like this:</p>
+<pre><code> ../
+    ├── bin
+    ├── conf
+    |── DISCLAIMER
+    |—— install.sh
+    |—— lib
+    |—— LICENSE
+    |—— licenses
+    |—— NOTICE
+    |—— script
+    |—— sql
+</code></pre>
+</li>
+</ul>
 <h3>Start-and-stop services commonly used in systems (for service purposes, please refer to System Architecture Design for details)</h3>
 <ul>
 <li>
